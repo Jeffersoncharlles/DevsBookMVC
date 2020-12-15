@@ -1,0 +1,35 @@
+-Users
+--id
+--email
+--password
+--name
+--birthdate
+--city
+--work
+--avatar
+--cover
+--token
+
+-UserRelations
+--id
+--user_from /* de usuario  X */
+--user_to   /* para usuario  Y */
+
+-Posts
+--id
+--type (text,photo)
+--created_post
+--body 
+
+-PostComments
+--id
+--id_post
+--id_user
+--created_at
+--body
+
+-PostLikes
+--id
+--id_post
+--id_user
+--created_at
