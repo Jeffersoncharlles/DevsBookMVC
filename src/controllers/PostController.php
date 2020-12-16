@@ -21,8 +21,8 @@ class PostController extends Controller {
     public function new() {
         
         $body = filter_input(INPUT_POST, 'body');
-
         $user = $this->loggedUser->id;
+        
         $type = 'text';
 
         if ($body) {

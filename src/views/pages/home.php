@@ -8,8 +8,11 @@
 
                         <?php $render('feed-editor', ['user'=>$loggedUser]); ?>
 
-                        <?php $render('feed-item'); ?>
-                       
+                        <?php foreach($feed as $feedItem): ?>
+
+                            <?php $render('feed-item', ['data'=> $feedItem ]); ?>
+
+                        <?php endforeach; ?>
                     </div>
                     <div class="column side pl-5">
                         <div class="box banners">
