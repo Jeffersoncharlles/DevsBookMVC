@@ -10,7 +10,7 @@ class LoginHandler {
             $token = $_SESSION['token'];
 
             $data = User::select()->where('token', $token)->one();
-            if (count($data) > 0) {
+            if ($data > 0) {
                 $logado = new User();
                 $logado->id = $data['id'];
                 $logado->email = $data['email'];
@@ -47,15 +47,24 @@ class LoginHandler {
         ->where('email', $email)
         ->one();
 
-        if (cond) {
-        
-        }
-
-        return false;
+        return $user ? true : false;
+        /*se ele achou o email ele retorna true se nao retorna false*/
     }
 
-    public static function addUser($name, $email, $pass, $birthdate)
-    {
-        # code...
+    public  function addUser($name, $email, $pass, $birthdate){
+        $hash = password_hash($pass, PASSWORD_DEFAULT);
+        $token = md5(time().rand(0,9999).time());
+
+        User::insert([
+          'email'=> $email,  
+          'password'=> $hash,  
+          'name'=> $name,  
+          'birthdate'=> $birthdate,  
+          'avatar'=> 'default.jpg',  
+          'cover'=> 'cover.jpg',
+          'token'=> $token
+        ])->execute();
+
+        return $token;
     }
 }

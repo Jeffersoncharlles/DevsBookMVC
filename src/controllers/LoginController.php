@@ -59,20 +59,33 @@ class LoginController extends Controller {
 
         if ($name && $email && $pass && $birthdate) {
             $birthdate = explode('/',$birthdate);
+            /*divide em um array com 3 strings*/
             if (count($birthdate) !=3) {
+                /*conta se ele tem realmente 3 strings 
+                != negativo se for diferente de 3 ja cancela*/
                 $_SESSION['flash'] = 'Data de Nascimento inválida!';
                 $this->redirect('/cadastro');
             }
             $birthdate = $birthdate[2].'-'.$birthdate[1].'-'.$birthdate[0];
+            /*coloca o - no array transformando em data*/
             if (strtotime($birthdate) === false) {
+                /*transforma string de tempo em miliseguindos para verificar */
                 $_SESSION['flash'] = 'Data de Nascimento inválida!';
                 $this->redirect('/cadastro');
             }
 
             if (LoginHandler::emailExists($email) === false) {
+                /*verificar se email existe
+                se nao existe ele add e joga o token e ja passa usuario*/
                 $token = LoginHandler::addUser($name, $email, $pass, $birthdate);
                 $_SESSION['token'] = $token;
+                $this->redirect('/');
+            }else {
+                $_SESSION['flash'] = 'E-mail já cadastrado!';
+                $this->redirect('/cadastro');
             }
+        }else{
+            $this->redirect('/cadastro');
         }
     }
 
