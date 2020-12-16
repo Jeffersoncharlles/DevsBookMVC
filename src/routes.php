@@ -19,5 +19,6 @@ $router->get('/cadastro', 'LoginController@signup');
 /*rotas estaticas POST*/
 $router->post('/login', 'LoginController@signinAction');
 $router->post('/cadastro', 'LoginController@signupAction');
+$router->post('/post/new', 'PostController@new');
 
 
