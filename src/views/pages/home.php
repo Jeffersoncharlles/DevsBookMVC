@@ -1,4 +1,4 @@
-    <?php $render('header'); ?>
+    <?php $render('header', ['loggedUser' => $loggedUser]); ?>
     <section class="container main">
         <?php $render('sidebar'); ?>
 
@@ -11,12 +11,12 @@
                             <div class="box-body">
                                 <div class="feed-new-editor m-10 row">
                                     <div class="feed-new-avatar">
-                                        <img src="<?=$base?>/media/avatars/avatar.jpg" />
+                                        <img src="<?=$base;?>/media/avatars/default.jpg" />
                                     </div>
                                     <div class="feed-new-input-placeholder">O que você está pensando, Bonieky?</div>
                                     <div class="feed-new-input" contenteditable="true"></div>
                                     <div class="feed-new-send">
-                                        <img src="<?=$base?>/assets/images/send.png" />
+                                        <img src="<?=$base;?>//assets/images/send.png" />
                                     </div>
                                 </div>
                             </div>
@@ -26,10 +26,10 @@
                             <div class="box-body">
                                 <div class="feed-item-head row mt-20 m-width-20">
                                     <div class="feed-item-head-photo">
-                                        <a href=""><img src="<?=$base?>/media/avatars/avatar.jpg" /></a>
+                                        <a href=""><img src="<?=$base;?>/media/avatars/default.jpg" /></a>
                                     </div>
                                     <div class="feed-item-head-info">
-                                        <a href=""><span class="fidi-name">Bonieky Lacerda</span></a>
+                                        <a href="<?=$base;?>/"><span class="fidi-name">Bonieky Lacerda</span></a>
                                         <span class="fidi-action">fez um post</span>
                                         <br/>
                                         <span class="fidi-date">07/03/2020</span>
@@ -51,7 +51,7 @@
                                     
                                     <div class="fic-item row m-height-10 m-width-20">
                                         <div class="fic-item-photo">
-                                            <a href=""><img src="<?=$base?>/media/avatars/avatar.jpg" /></a>
+                                            <a href=""><img src="<?=$base?>/media/avatars/default.jpg" /></a>
                                         </div>
                                         <div class="fic-item-info">
                                             <a href="">Bonieky Lacerda</a>
@@ -61,7 +61,7 @@
 
                                     <div class="fic-item row m-height-10 m-width-20">
                                         <div class="fic-item-photo">
-                                            <a href=""><img src="<?=$base?>/media/avatars/avatar.jpg" /></a>
+                                            <a href=""><img src="<?=$base?>/media/avatars/default.jpg" /></a>
                                         </div>
                                         <div class="fic-item-info">
                                             <a href="">Bonieky Lacerda</a>
@@ -71,7 +71,7 @@
 
                                     <div class="fic-answer row m-height-10 m-width-20">
                                         <div class="fic-item-photo">
-                                            <a href=""><img src="<?=$base?>/media/avatars/avatar.jpg" /></a>
+                                            <a href=""><img src="<?=$base?>/media/avatars/default.jpg" /></a>
                                         </div>
                                         <input type="text" class="fic-item-field" placeholder="Escreva um comentário" />
                                     </div>
@@ -79,8 +79,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        
 
                     </div>
                     <div class="column side pl-5">
