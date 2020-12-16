@@ -11,10 +11,19 @@ class LoginController extends Controller {
 
         $this->render('login', ['nome' => 'Bonieky']);
     }
+
+    public function signinAction() {
+
+        
+        
+    }
+
     public function signup() {
 
 
         $this->render('cadastro', ['nome' => 'Bonieky']);
     }
+
+    
 
 }
