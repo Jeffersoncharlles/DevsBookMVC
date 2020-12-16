@@ -21,4 +21,41 @@ class LoginHandler {
         }
         return false;
     }
+    
+    public static function verifyLogin($email, $pass){
+        $user = User::select()
+        ->where('email', $email)
+        ->one();
+
+        if ($user) {
+            if (password_verify($pass, $user['password'])) {
+                $token = md5(time().rand(0,9999).time());
+
+                User::update()
+                ->set('token', $token)
+                ->where('email', $email)
+                ->execute();
+
+                return $token;
+            }
+        }
+        return false;
+    }
+
+    public static function emailExists($email){
+        $user = User::select()
+        ->where('email', $email)
+        ->one();
+
+        if (cond) {
+        
+        }
+
+        return false;
+    }
+
+    public static function addUser($name, $email, $pass, $birthdate)
+    {
+        # code...
+    }
 }
