@@ -9,7 +9,9 @@ $router->get('/login', 'LoginController@signin');
 $router->get('/cadastro', 'LoginController@signup');
 
 //$router->get('/pesquisa', '@');
-//$router->get('/perfil', '@');
+$router->get('/perfil/{id}', 'ProfileController@index');
+$router->get('/perfil', 'ProfileController@index');
+
 //$router->get('/amigos', '@');
 //$router->get('/fotos', '@');
 //$router->get('/config', '@');
@@ -20,6 +22,6 @@ $router->get('/cadastro', 'LoginController@signup');
 $router->post('/login', 'LoginController@signinAction');
 $router->post('/cadastro', 'LoginController@signupAction');
 $router->post('/post/new', 'PostController@new');
-$router->post('/posts/json', 'HomeController@postsJson');
+//$router->post('/posts/json', 'HomeController@postsJson');
 
 
