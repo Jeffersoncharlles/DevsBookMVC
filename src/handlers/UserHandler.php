@@ -2,6 +2,7 @@
 namespace src\handlers;
 
 use \src\models\User;
+use \src\models\UserRelation;
 
 class UserHandler {
 
@@ -62,7 +63,7 @@ class UserHandler {
         /*se ele achou o email ele retorna true se nao retorna false*/
     }
 
-     public function getUser($id){
+     public function getUser($id, $full = false){
        $data = User::select()->where('id',$id)->one();
        if ($data) {
             $user = new User();
@@ -73,6 +74,49 @@ class UserHandler {
             $user->birthdate =  $data['birthdate'];
             $user->city =  $data['city'];
             $user->work =  $data['work'];
+
+            if ($full) {
+                $user->followers = []; //seguidores
+                $user->following = []; //seguindo
+                $user->photos = [];
+
+                //followers
+                $followers = UserRelation::select()
+                    ->where('user_to', $id)
+                ->get();
+                foreach ($followers as $follower) {
+
+                    $userData = User::select()
+                        ->where('id', $follower['user_from'])
+                    ->one();
+
+                    $newUser = new User();
+                    $newUser->id = $userData['id'];
+                    $newUser->name = $userData['name'];
+                    $newUser->avatar = $userData['avatar'];
+
+                    $user->followers[] = $newUser;
+                }
+                //following
+                $followings = UserRelation::select()
+                    ->where('user_from', $id)
+                ->get();
+                foreach ($followings as $following) {
+
+                    $userData = User::select()
+                        ->where('id', $following['user_to'])
+                    ->one();
+
+                    $newUser = new User();
+                    $newUser->id = $userData['id'];
+                    $newUser->name = $userData['name'];
+                    $newUser->avatar = $userData['avatar'];
+
+                    $user->following[] = $newUser;
+                }
+                //photos
+
+            }
 
             return $user;
        }

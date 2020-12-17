@@ -27,7 +27,7 @@ class ProfileController extends Controller {
             //verifica quem ele quer acessar
         }
 
-        $user = UserHandler::getUser($id);
+        $user = UserHandler::getUser($id, true);
 
         if (!$user) {
             $this->redirect('/');
