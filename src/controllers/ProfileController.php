@@ -17,7 +17,8 @@ class ProfileController extends Controller {
             $this->redirect('/login');
         }
     }
-
+/*===============================================================================*/
+/*===============================================================================*/
     public function index($idUser = []) {
         $page = intval(filter_input(INPUT_GET, 'page'));
 
@@ -61,7 +62,8 @@ class ProfileController extends Controller {
             'isFlollowing'=>$isFlollowing
         ]);
     }
-
+/*===============================================================================*/
+/*===============================================================================*/
     public function follow($id){
         $to = intval($id['id']);
         
@@ -80,4 +82,73 @@ class ProfileController extends Controller {
 
         $this->redirect('/perfil/'.$to);
     }
+/*===============================================================================*/
+/*===============================================================================*/
+    public function friends($idRec = []){
+        
+        //1.dectectando o usuario acessado
+        $id = $this->loggedUser->id;
+        if (!empty($idRec['id'])) {
+            $id = $idRec['id'];
+            //verifica quem ele quer acessar
+        }
+        //2.pegando informacoes do usuario
+        $user = UserHandler::getUser($id, true);
+        if (!$user) {
+            $this->redirect('/');
+        }
+        
+        //3.comparando data de aaniversario do usuario 
+        $dateFrom = new \DateTime($user->birthdate);
+        $dateTo = new \DateTime('today');
+        $user->ageYears =$dateFrom->diff($dateTo)->y;
+
+        $isFlollowing = false;
+        if ($user->id != $this->loggedUser->id) {
+            $isFlollowing = UserHandler::isFollowing($this->loggedUser->id, $user->id);
+        }
+
+        //5. verificar se EU SIGO o usuario
+        $this->render('profile_friends', [
+            'loggedUser' => $this->loggedUser,
+            'user'=> $user,
+            'isFlollowing'=>$isFlollowing
+        ]);
+
+    }
+/*===============================================================================*/
+/*===============================================================================*/
+    public function photos($idRec = []){
+        
+        //1.dectectando o usuario acessado
+        $id = $this->loggedUser->id;
+        if (!empty($idRec['id'])) {
+            $id = $idRec['id'];
+            //verifica quem ele quer acessar
+        }
+        //2.pegando informacoes do usuario
+        $user = UserHandler::getUser($id, true);
+        if (!$user) {
+            $this->redirect('/');
+        }
+        
+        //3.comparando data de aaniversario do usuario 
+        $dateFrom = new \DateTime($user->birthdate);
+        $dateTo = new \DateTime('today');
+        $user->ageYears =$dateFrom->diff($dateTo)->y;
+
+        $isFlollowing = false;
+        if ($user->id != $this->loggedUser->id) {
+            $isFlollowing = UserHandler::isFollowing($this->loggedUser->id, $user->id);
+        }
+
+        //5. verificar se EU SIGO o usuario
+        $this->render('profile_photos', [
+            'loggedUser' => $this->loggedUser,
+            'user'=> $user,
+            'isFlollowing'=>$isFlollowing
+        ]);
+    }
+/*===============================================================================*/
+/*===============================================================================*/
 }

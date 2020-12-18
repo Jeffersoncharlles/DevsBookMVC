@@ -18,7 +18,8 @@ class LoginController extends Controller {
             'flash'=> $flash
         ]);
     }
-
+/*===============================================================================*/
+/*===============================================================================*/
     public function signinAction() {
 
         $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
@@ -37,7 +38,8 @@ class LoginController extends Controller {
                 $this->redirect('/login');
             }    
     }
-
+/*===============================================================================*/
+/*===============================================================================*/
     public function signup() {
 
         $flash = '';
@@ -49,7 +51,8 @@ class LoginController extends Controller {
             'flash'=> $flash
         ]);
     }
-
+/*===============================================================================*/
+/*===============================================================================*/
     public function signupAction(){
         
         $name = filter_input(INPUT_POST, 'name');
@@ -88,7 +91,8 @@ class LoginController extends Controller {
             $this->redirect('/cadastro');
         }
     }
-
+/*===============================================================================*/
+/*===============================================================================*/
     public function logout(){
         $_SESSION['token'] = '';
 

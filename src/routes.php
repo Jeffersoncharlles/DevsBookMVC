@@ -10,9 +10,20 @@ $router->get('/cadastro', 'LoginController@signup');
 $router->get('/sair', 'LoginController@logout');
 
 //$router->get('/pesquisa', '@');
+$router->get('/perfil/{id}/fotos', 'ProfileController@photos');
+$router->get('/perfil/{id}/amigos', 'ProfileController@friends');
 $router->get('/perfil/{id}/follow', 'ProfileController@follow');
 $router->get('/perfil/{id}', 'ProfileController@index');
 $router->get('/perfil', 'ProfileController@index');
+
+$router->get('/amigos', 'ProfileController@friends');
+$router->get('/fotos', 'ProfileController@photos');
+
+
+
+$router->get('/pesquisa', 'SearchController@index');
+
+
 
 //$router->get('/amigos', '@');
 //$router->get('/fotos', '@');

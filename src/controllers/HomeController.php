@@ -17,7 +17,8 @@ class HomeController extends Controller {
             $this->redirect('/login');
         }
     }
-
+/*===============================================================================*/
+/*===============================================================================*/
     public function index() {
         $page = intval(filter_input(INPUT_GET, 'page'));
         $idUser = $this->loggedUser->id;
@@ -29,7 +30,8 @@ class HomeController extends Controller {
             'feed' => $feed
         ]);
     }
-
+/*===============================================================================*/
+/*===============================================================================*/
     /*public function postsJson(){
         $start = filter_input(INPUT_POST, 'start');
         $limit = filter_input(INPUT_POST, 'limit');
@@ -55,5 +57,6 @@ class HomeController extends Controller {
 
     }
     */
-
+/*===============================================================================*/
+/*===============================================================================*/
 }

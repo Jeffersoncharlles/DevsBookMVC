@@ -390,6 +390,7 @@ header .head-side {
 }
 .full-user-photos .user-photo-item {
     margin:0;
+    max-width: 100%;
 }
 .feed-pagination a{
     display: inline-block;
@@ -421,7 +422,9 @@ header .head-side {
     background-color:#477dbb;
 }
 
-
+.linktext{
+    text-decoration: none;
+}
 
 
 @media (max-width: 992px) {

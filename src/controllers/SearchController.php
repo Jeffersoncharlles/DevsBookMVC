@@ -5,7 +5,7 @@ use \core\Controller;
 use \src\handlers\UserHandler;
 use src\handlers\PostHandler;
 
-class PostController extends Controller {
+class SearchController extends Controller {
 
     private $loggedUser;
 
@@ -19,18 +19,22 @@ class PostController extends Controller {
     }
 /*===============================================================================*/
 /*===============================================================================*/
-    public function new() {
-        
-        $body = filter_input(INPUT_POST, 'body');
-        $user = $this->loggedUser->id;
-        
-        $type = 'text';
+    public function index($sear = []) {
+        $searchTerm = filter_input(INPUT_GET, 's');
+        if (empty($searchTerm)) {
+            $this->redirect('/');
+        }   
 
-        if ($body) {
-            PostHandler::addPost($user, $type, $body);
-        }
-        $this->redirect('/');
+        $users = UserHandler::searchUser($searchTerm);
+
+        $this->render('search', [
+            'loggedUser' => $this->loggedUser,
+            'searchTerm'=> $searchTerm,
+            'users' => $users
+            
+        ]);
     }
 /*===============================================================================*/
 /*===============================================================================*/
+
 }
