@@ -207,76 +207,21 @@ class UserHandler {
     }
 /*===============================================================================*/
 /*===============================================================================*/
-    public static function updateName($id, $name) {
-        $user = User::select()->where('id', $id)->one();
-        $hash = password_hash($password, PASSWORD_DEFAULT);
-        
-        if($name){
-            User::update()
-                ->set('name', $name)
-                ->where('id', $id)
-            ->execute();
-        }
-    }
-/*===============================================================================*/
-/*===============================================================================*/
-    public static function updateEmail($id, $email) {
-        $user = User::select()->where('id', $id)->one();
-        
-        if($email){
-            User::update()
-                ->set('email', $email)
-                ->where('id', $id)
-            ->execute();
-        }
-    }
-/*===============================================================================*/
-/*===============================================================================*/
-    public static function updateBirthdate($id, $birthdate) {
-        $user = User::select()->where('id', $id)->one();
-        
-        if($birthdate){
-            User::update()
-                ->set('birthdate', $birthdate)
-                ->where('id', $id)
-            ->execute();
-        }
-    }
-/*===============================================================================*/
-/*===============================================================================*/
-    public static function updateCity($id, $city) {
-        $user = User::select()->where('id', $id)->one();
-        
-        if($city){
-            User::update()
-                ->set('city', $city)
-                ->where('id', $id)
-            ->execute();
-        }
-    }
-/*===============================================================================*/
-/*===============================================================================*/
-    public static function updateWork($id, $work) {
-        $user = User::select()->where('id', $id)->one();
-        
-        if($work){
-            User::update()
-                ->set('work', $work)
-                ->where('id', $id)
-            ->execute();
-        }
-    }
-/*===============================================================================*/
-/*===============================================================================*/
-    public static function updatePassword($id, $password) {
-        $user = User::select()->where('id', $id)->one();
-        
-        
-        if($hash){
-            User::update()
-                ->set('password', $hash)
-                ->where('id', $id)
-            ->execute();
+    public static function updateUser($fields, $idUser) {
+        if(count($fields) > 0) {
+
+            $update = User::update();
+
+            foreach($fields as $fieldName => $fieldValue) {
+                if($fieldName == 'password') {
+                    $fieldValue = password_hash($fieldValue, PASSWORD_DEFAULT);
+                }
+
+                $update->set($fieldName, $fieldValue);
+            }
+
+            $update->where('id', $idUser)->execute();
+
         }
     }
 /*===============================================================================*/
