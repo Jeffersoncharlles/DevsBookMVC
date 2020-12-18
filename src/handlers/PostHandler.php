@@ -6,7 +6,7 @@ use \src\models\User;
 use \src\models\UserRelation;
 
 class PostHandler {
-
+/*===============================================================================*/
     public static function addPost($user, $type, $body){
         $date = date('Y-m-d H:i:s');
         $body = trim($body);
@@ -20,7 +20,9 @@ class PostHandler {
             ])->execute();
         }
     }
-
+/*===============================================================================*/
+/*===============================================================================*/
+/*===============================================================================*/
     public static function _postListToObject($postsList,$loggedUserId){
         // 3 . transforma o resultado em obj dos models.
     $posts = [];
@@ -56,7 +58,9 @@ class PostHandler {
         }
         return $posts;
     }
-    public static function getUserFedd($idUser, $page){
+/*===============================================================================*/
+/*===============================================================================*/
+    public static function getUserFedd($idUser, $page, $loggedUserId){
     
     $perPage = 4;
 
@@ -73,14 +77,15 @@ class PostHandler {
    $pageCount = ceil($total / $perPage);
    
   // 3 . transforma o resultado em obj dos models.
-  $posts = self::_postListToObject($postsList,$idUser);
+  $posts = self::_postListToObject($postsList,$loggedUserId);
    
   
   // 5 . retornar o resultado
    return ['posts'=> $posts, 'pageCount'=> $pageCount, 'currentPage'=> $page];
         
     }
-
+/*===============================================================================*/
+/*===============================================================================*/
     public static function getHomeFeed($idUser,$page){
         $perPage = 4;
 
@@ -120,7 +125,8 @@ class PostHandler {
        // 5 . retornar o resultado
         return ['posts'=> $posts, 'pageCount'=> $pageCount, 'currentPage'=> $page];
     }
-    
+/*===============================================================================*/
+/*===============================================================================*/
     public static function getPhotosFrom($id){
         $photosData = Post::select()
             ->where('id_user', $id)
