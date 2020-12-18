@@ -32,11 +32,18 @@ class ProfileController extends Controller {
         if (!$user) {
             $this->redirect('/');
         }
+        
+        $dateFrom = new \DateTime($user->birthdate);
+        $dateTo = new \DateTime('today');
+        $user->ageYears =$dateFrom->diff($dateTo)->y;
+        /*compara hoje menos a data que o cara nasceu e ve quantos anos da isso*/
 
+        $feed = PostHandler::getUserFedd($id);
         
         $this->render('profile', [
             'loggedUser' => $this->loggedUser,
-            'user'=> $user
+            'user'=> $user,
+            'feed'=> $feed
         ]);
     }
 }
