@@ -6,7 +6,8 @@ use \src\models\UserRelation;
 use \src\handlers\PostHandler;
 
 class UserHandler {
-
+/*===============================================================================*/
+/*===============================================================================*/
     public static function checkLogin(){
         if (!empty($_SESSION['token'])) {
             $token = $_SESSION['token'];
@@ -25,7 +26,8 @@ class UserHandler {
         }
         return false;
     }
-    
+/*===============================================================================*/
+/*===============================================================================*/    
     public static function verifyLogin($email, $pass){
         $user = User::select()
         ->where('email', $email)
@@ -45,7 +47,8 @@ class UserHandler {
         }
         return false;
     }
-
+/*===============================================================================*/
+/*===============================================================================*/
     public static function emailExists($email){
         $user = User::select()
         ->where('email', $email)
@@ -54,7 +57,8 @@ class UserHandler {
         return $user ? true : false;
         /*se ele achou o email ele retorna true se nao retorna false*/
     }
-    
+/*===============================================================================*/
+/*===============================================================================*/   
     public static function idExists($id){
         $user = User::select()
         ->where('id', $id)
@@ -63,8 +67,9 @@ class UserHandler {
         return $user ? true : false;
         /*se ele achou o email ele retorna true se nao retorna false*/
     }
-
-     public function getUser($id, $full = false){
+/*===============================================================================*/
+/*===============================================================================*/
+     public static function getUser($id, $full = false){
        $data = User::select()->where('id',$id)->one();
        if ($data) {
             $user = new User();
@@ -127,8 +132,9 @@ class UserHandler {
 
        return false;
     }
-
-    public  function addUser($name, $email, $pass, $birthdate){
+/*===============================================================================*/
+/*===============================================================================*/
+    public static function addUser($name, $email, $pass, $birthdate){
         $hash = password_hash($pass, PASSWORD_DEFAULT);
         $token = md5(time().rand(0,9999).time());
 
@@ -144,4 +150,21 @@ class UserHandler {
 
         return $token;
     }
+/*===============================================================================*/
+/*===============================================================================*/
+    public static function isFollowing($from, $to){
+
+       $data = UserRelation::select()
+            ->where('user_from', $from)
+            ->where('user_to', $to)
+        ->one();
+        
+        if($data) {
+            return true;
+        }
+        return false;
+    }
+
+/*===============================================================================*/
+/*===============================================================================*/
 }

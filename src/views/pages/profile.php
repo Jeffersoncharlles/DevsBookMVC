@@ -17,6 +17,15 @@
                                 <div class="profile-info-location"><?=$user->city;?></div>
                             </div>
                             <div class="profile-info-data row">
+                                <?php if($user->id != $loggedUser->id): ?>
+                                    <div class="profile-info-item m-width-20">
+                                        <?php if($isFlollowing): ?>
+                                            <a href="" class="button">Deixar de Seguir</a>
+                                        <?php else: ?>
+                                            <a href="" class="button">Seguir</a>
+                                        <?php endif; ?>
+                                    </div>
+                                <?php endif; ?>
                                 <div class="profile-info-item m-width-20">
                                     <div class="profile-info-item-n"><?=count($user->followers);?></div>
                                     <div class="profile-info-item-s">Seguidores</div>
@@ -129,6 +138,13 @@
                             
                         </div>
                     </div>
+
+                    <?php if($user->id === $loggedUser->id): ?>
+
+                        <?php $render('feed-editor', ['user'=>$loggedUser]); ?>
+
+                    <?php endif; ?>
+                    
 
                     <?php foreach($feed['posts'] as $feedItem): ?>
 
