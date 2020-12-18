@@ -54,12 +54,30 @@ class ProfileController extends Controller {
         }
 
 
-        
         $this->render('profile', [
             'loggedUser' => $this->loggedUser,
             'user'=> $user,
             'feed'=> $feed,
             'isFlollowing'=>$isFlollowing
         ]);
+    }
+
+    public function follow($id){
+        $to = intval($id['id']);
+        
+
+        $exists = UserHandler::idExists($to);
+
+        if ($exists) {
+            if(UserHandler::isFollowing($this->loggedUser->id,$to)){
+                //dessiguir
+                UserHandler::unfollow($this->loggedUser->id,$to);
+            }else{
+                //seguir
+                UserHandler::follow($this->loggedUser->id,$to);
+            }
+        }
+
+        $this->redirect('/perfil/'.$to);
     }
 }

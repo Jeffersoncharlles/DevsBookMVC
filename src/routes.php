@@ -10,6 +10,7 @@ $router->get('/cadastro', 'LoginController@signup');
 $router->get('/sair', 'LoginController@logout');
 
 //$router->get('/pesquisa', '@');
+$router->get('/perfil/{id}/follow', 'ProfileController@follow');
 $router->get('/perfil/{id}', 'ProfileController@index');
 $router->get('/perfil', 'ProfileController@index');
 
