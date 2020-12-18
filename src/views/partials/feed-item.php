@@ -1,4 +1,4 @@
-<div class="box feed-item">
+<div class="box feed-item" data-id="<?=$data->id;?>">
     <div class="box-body">
         <div class="feed-item-head row mt-20 m-width-20">
             <div class="feed-item-head-photo">
@@ -29,7 +29,7 @@
             <div class="feed-item-head-btn">
                 <img src="<?=$base?>/assets/images/more.png" />
             </div>
-        </div>
+        </div>+
         <div class="feed-item-body mt-10 m-width-20">
         <?=nl2br($data->body); //nl2br muda pulada de linha para br?>
         </div>
