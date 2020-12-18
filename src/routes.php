@@ -22,6 +22,7 @@ $router->get('/fotos', 'ProfileController@photos');
 
 
 $router->get('/pesquisa', 'SearchController@index');
+$router->get('/config', 'ConfigController@index');
 
 
 
@@ -35,6 +36,7 @@ $router->get('/pesquisa', 'SearchController@index');
 $router->post('/login', 'LoginController@signinAction');
 $router->post('/cadastro', 'LoginController@signupAction');
 $router->post('/post/new', 'PostController@new');
+$router->post('/config', 'ConfigController@updateAction');
 //$router->post('/posts/json', 'HomeController@postsJson');
 
 

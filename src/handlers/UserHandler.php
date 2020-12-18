@@ -80,6 +80,7 @@ class UserHandler {
             $user->birthdate =  $data['birthdate'];
             $user->city =  $data['city'];
             $user->work =  $data['work'];
+            $user->email =  $data['email'];
 
             if ($full) {
                 $user->followers = []; //seguidores
@@ -186,9 +187,97 @@ class UserHandler {
 /*===============================================================================*/
 /*===============================================================================*/
     public static function searchUser($sear){
+        $users = [];
+
         $data = User::select()
             ->where('name', 'like', '%'.$sear.'%')
         ->get();
+
+        if ($data) {
+            foreach ($data as $user) {
+                $newUser = new User();
+                $newUser->id = $user['id'];
+                $newUser->name = $user['name'];
+                $newUser->avatar = $user['avatar'];
+
+                $users[] = $newUser;
+            }
+        }
+        return $users;
+    }
+/*===============================================================================*/
+/*===============================================================================*/
+    public static function updateName($id, $name) {
+        $user = User::select()->where('id', $id)->one();
+        $hash = password_hash($password, PASSWORD_DEFAULT);
+        
+        if($name){
+            User::update()
+                ->set('name', $name)
+                ->where('id', $id)
+            ->execute();
+        }
+    }
+/*===============================================================================*/
+/*===============================================================================*/
+    public static function updateEmail($id, $email) {
+        $user = User::select()->where('id', $id)->one();
+        
+        if($email){
+            User::update()
+                ->set('email', $email)
+                ->where('id', $id)
+            ->execute();
+        }
+    }
+/*===============================================================================*/
+/*===============================================================================*/
+    public static function updateBirthdate($id, $birthdate) {
+        $user = User::select()->where('id', $id)->one();
+        
+        if($birthdate){
+            User::update()
+                ->set('birthdate', $birthdate)
+                ->where('id', $id)
+            ->execute();
+        }
+    }
+/*===============================================================================*/
+/*===============================================================================*/
+    public static function updateCity($id, $city) {
+        $user = User::select()->where('id', $id)->one();
+        
+        if($city){
+            User::update()
+                ->set('city', $city)
+                ->where('id', $id)
+            ->execute();
+        }
+    }
+/*===============================================================================*/
+/*===============================================================================*/
+    public static function updateWork($id, $work) {
+        $user = User::select()->where('id', $id)->one();
+        
+        if($work){
+            User::update()
+                ->set('work', $work)
+                ->where('id', $id)
+            ->execute();
+        }
+    }
+/*===============================================================================*/
+/*===============================================================================*/
+    public static function updatePassword($id, $password) {
+        $user = User::select()->where('id', $id)->one();
+        
+        
+        if($hash){
+            User::update()
+                ->set('password', $hash)
+                ->where('id', $id)
+            ->execute();
+        }
     }
 /*===============================================================================*/
 /*===============================================================================*/
