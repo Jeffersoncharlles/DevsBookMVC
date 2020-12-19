@@ -104,6 +104,17 @@ class PostHandler {
 
 /*===============================================================================*/
 /*===============================================================================*/
+    public static function addComment($id, $txt, $idUser){
+       PostComment::insert([
+            'id_post'=> $id,
+            'id_user'=> $idUser,
+            'created_comment'=> date('Y-m-d H:i:s'),
+            'body'=> $txt
+        ])->execute();
+    }
+
+/*===============================================================================*/
+/*===============================================================================*/
     public static function getUserFedd($idUser, $page, $loggedUserId){
     
     $perPage = 4;

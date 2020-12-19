@@ -39,26 +39,27 @@
         </div>
         <div class="feed-item-comments">
 
-            <?php foreach ($data->comments as $comm):?>
+            <div class="feed-item-comments-area">
+                <?php foreach ($data->comments as $comm):?>
 
-            <div class="fic-item row m-height-10 m-width-20">
+                    <div class="fic-item row m-height-10 m-width-20">
 
-                <div class="fic-item-photo">
-                    <a href="<?=$base?>/perfil/<?=$comm['user']['id'];?>">
-                        <img src="<?=$base?>/media/avatars/<?=$comm['user']['avatar'];?>" />
-                    </a>
-                </div>
+                        <div class="fic-item-photo">
+                            <a href="<?=$base?>/perfil/<?=$comm['user']['id'];?>">
+                                <img src="<?=$base?>/media/avatars/<?=$comm['user']['avatar'];?>" />
+                            </a>
+                        </div>
 
-                <div class="fic-item-info">
-                    <a href="<?=$base?>/perfil/<?=$comm['user']['id'];?>">
-                        <?=$comm['user']['name'];?>
-                    </a>
-                    <?=$comm['body'];?>
-                </div>
-                
+                        <div class="fic-item-info">
+                            <a href="<?=$base?>/perfil/<?=$comm['user']['id'];?>">
+                                <?=$comm['user']['name'];?>
+                            </a>
+                            <?=$comm['body'];?>
+                        </div>
+                    </div>
+
+                <?php endforeach; ?>
             </div>
-
-            <?php endforeach; ?>
 
             <div class="fic-answer row m-height-10 m-width-20">
                 <div class="fic-item-photo">
