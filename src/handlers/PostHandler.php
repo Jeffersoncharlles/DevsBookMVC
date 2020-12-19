@@ -205,5 +205,32 @@ class PostHandler {
 
 /*===============================================================================*/
 /*===============================================================================*/
+    public static function delete($idPost, $idUser){
+        //1. verificar se o poste existe e se e do usuario logado
+        $post = Post::select()
+            ->where('id',$idPost)
+            ->where('id_user',$idUser)
+        ->get();
+        
+        if (count($post) > 0) {
+            $post = $post[0];
 
+            //2. deletar os likes e comments
+            PostLike::delete()->where('id_post', $idPost)->execute();
+            PostComment::delete()->where('id_post', $idPost)->execute();
+
+            //3. se a foto for type photo deletar o arquivo
+            if ($post['type'] === 'photo') {
+                $img = __DIR__.'/../../public/media/uploads/'.$post['body'];
+                if (file_exists($img)) {
+                    unlink($img);
+                }
+            }
+
+            //4. deletar o post
+            Post::delete()->where('id', $idPost)->execute();
+        }   
+    }
+/*===============================================================================*/
+/*===============================================================================*/
 }

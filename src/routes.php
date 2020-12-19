@@ -45,3 +45,4 @@ $router->post('/ajax/upload', 'AjaxController@upload');
 //$router->post('/posts/json', 'HomeController@postsJson');
 
 
+$router->get('/post/{id}/delete', 'PostController@delete');

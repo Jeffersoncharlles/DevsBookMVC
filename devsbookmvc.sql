@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS `postcomments` (
   `created_comment` datetime NOT NULL,
   `body` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4;
 
 -- Exportação de dados foi desmarcado.
 
@@ -36,18 +36,19 @@ CREATE TABLE IF NOT EXISTS `postlikes` (
   `id_user` int(11) NOT NULL DEFAULT 0,
   `created_likes` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
 
 -- Exportação de dados foi desmarcado.
 
 -- Copiando estrutura para tabela devsbook.posts
 CREATE TABLE IF NOT EXISTS `posts` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_user` int(11) NOT NULL,
   `type` varchar(20) NOT NULL DEFAULT '0',
   `created_post` datetime NOT NULL,
   `body` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4;
 
 -- Exportação de dados foi desmarcado.
 
@@ -57,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `userrelations` (
   `user_from` int(11) NOT NULL DEFAULT 0,
   `user_to` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
 
 -- Exportação de dados foi desmarcado.
 
@@ -68,13 +69,13 @@ CREATE TABLE IF NOT EXISTS `users` (
   `password` varchar(200) NOT NULL DEFAULT '0',
   `name` varchar(100) NOT NULL DEFAULT '0',
   `birthdate` date NOT NULL,
-  `city` varchar(100) NOT NULL DEFAULT '0',
-  `work` varchar(100) NOT NULL DEFAULT '0',
-  `avatar` varchar(100) NOT NULL DEFAULT '0',
-  `cover` varchar(100) NOT NULL DEFAULT '0',
-  `token` varchar(200) NOT NULL DEFAULT '0',
+  `city` varchar(100) DEFAULT NULL,
+  `work` varchar(100) DEFAULT NULL,
+  `avatar` varchar(100) NOT NULL DEFAULT 'default.jpg',
+  `cover` varchar(100) NOT NULL DEFAULT 'cover.jpg',
+  `token` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
 -- Exportação de dados foi desmarcado.
 
