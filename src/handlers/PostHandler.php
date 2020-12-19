@@ -2,6 +2,7 @@
 namespace src\handlers;
 
 use \src\models\Post;
+use src\models\PostComment;
 use src\models\PostLike;
 use \src\models\User;
 use \src\models\UserRelation;
@@ -54,15 +55,15 @@ class PostHandler {
                 ->where('id_post',$postsItem['id'])
             ->get();
 
-           
-
-          $newPost->likeCount = count($likes);
-
-          $newPost->liked = self::isLiked($postsItem['id'], $loggedUserId);
+        $newPost->likeCount = count($likes);//contar os likes
+        $newPost->liked = self::isLiked($postsItem['id'], $loggedUserId);//pegar de quem e os likes
 
 
       // 4.2 . preencher as info de COMMENTS.
-          $newPost->comments = [];
+          $newPost->comments = PostComment::select()->where('id_post',$postsItem['id'])->get();//pegar os comentarios
+          foreach ($newPost->comments as $key => $comment) {
+            $newPost->comments[$key]['user'] = User::select()->where('id',$comment['id_user'])->one();
+          }
 
             $posts[] = $newPost;
         }
