@@ -55,4 +55,64 @@ class AjaxController extends Controller {
     }
 /*===============================================================================*/
 /*===============================================================================*/
+    public function upload(){
+        $array = ['error' =>''];
+        
+        $folder = 'media/uploads/';
+
+        if(isset($_FILES['photo']) && !empty($_FILES['photo']['tmp_name'])){
+            $photo = $_FILES['photo'];
+
+            $maxWidth = 800;
+            $maxHeight = 800;
+
+            if (in_array($photo['type'], ['image/png','image/jpge','image/jpg'])) {
+
+                list($widthOrig, $heightOrig) = getimagesize($photo['tmp_name']);
+                $ratio = $widthOrig / $heightOrig ;
+
+                $newwidth = $maxWidth;
+                $newheight = $maxHeight;
+                $ratioMax = $maxWidth / $maxHeight ;
+
+                if ($ratioMax < $ratio) {
+                    $newwidth = $newheight  * $ratio;
+                }else{
+                    $newheight = $newwidth / $ratio;
+                }
+
+                $finalImage = imagecreatetruecolor($newwidth, $newheight);
+                switch ($photo['type']) {
+                    case 'image/jpeg':
+                    case 'image/jpg':
+                        $image = imagecreatefromjpeg($photo['tmp_name']);
+                        break;
+                    case 'image/png':
+                        $image = imagecreatefrompng($photo['tmp_name']);
+                        break;   
+                }
+
+                imagecopyresampled(
+                    $finalImage, $image,
+                    0, 0 , 0, 0,
+                    $newwidth, $newheight, $widthOrig ,$heightOrig
+                );
+
+                $photoName = md5(time().rand(0,9999)).'.jpg';
+                
+                imagejpeg($finalImage, $folder.$photoName);
+                PostHandler::addPost($this->loggedUser->id,'photo',$photoName);
+
+            }
+
+        }else{
+            $array['error'] = 'Nenhuma imagem enviada!';
+        }
+
+        header('Content-type: application/json');
+        echo json_encode($array);
+        exit;
+    }
+/*===============================================================================*/
+/*===============================================================================*/
 }

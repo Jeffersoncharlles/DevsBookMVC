@@ -41,6 +41,7 @@ $router->post('/post/new', 'PostController@new');
 $router->post('/config', 'ConfigController@updateAction');
 
 $router->post('/ajax/comment', 'AjaxController@comment');
+$router->post('/ajax/upload', 'AjaxController@upload');
 //$router->post('/posts/json', 'HomeController@postsJson');
 
 

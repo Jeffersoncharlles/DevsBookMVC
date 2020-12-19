@@ -86,15 +86,18 @@ if(document.querySelector('.fic-item-field')){
                     html += '<a href="'+BASE+json.link+'"><img src="'+BASE+json.avatar+'" /></a>';
                     html += '</div>';
                     html += '<div class="fic-item-info">';
-                    html += '<a href="'+BASE+bjson.link+'">'+json.name+'</a>';
+                    html += '<a href="'+BASE+json.link+'">'+json.name+'</a>';
                     html += json.body;
                     html += '</div>';
                     html += '</div>';
                     item.closest('.feed-item')
                         .querySelector('.feed-item-comments-area')
                         .innerHTML += html;
+
                 }
+                
             }
          });
     });
+    
 }
